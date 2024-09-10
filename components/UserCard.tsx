@@ -14,7 +14,7 @@ export default function UserCard({ user }: UserCardProps) {
           <img
             width={40}
             height={40}
-            src="/avatar.png"
+            src="/Avatar.png"
             alt={`${user.firstName} ${user.lastName}'s avatar`}
             className="w-10 h-10 rounded-full transition-opacity duration-300 hover:opacity-80"
           />

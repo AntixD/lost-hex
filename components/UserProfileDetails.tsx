@@ -21,7 +21,7 @@ const UserProfileDetails = ({ user }: UserProfileDetailsProps) => {
             <img
               width={120}
               height={120}
-              src="/avatar.png"
+              src="/Avatar.png"
               alt={`${user.firstName} ${user.lastName}'s avatar`}
               className="rounded-full"
             />
@@ -38,7 +38,7 @@ const UserProfileDetails = ({ user }: UserProfileDetailsProps) => {
                   width={12}
                   height={14}
                   alt="location"
-                  src="/icon (3).png"
+                  src="/Icon (3).png"
                 />
                 {user.address.city}, {user.address.country}
               </p>

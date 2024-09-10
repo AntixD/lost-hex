@@ -19,7 +19,7 @@ const PostCard = forwardRef<HTMLDivElement, PostCardProps>(function PostCard(
           <img
             width={40}
             height={40}
-            src="/avatar.png"
+            src="/Avatar.png"
             alt={`${user.firstName} ${user.lastName}'s avatar`}
             className="w-10 h-10 rounded-full transition-opacity duration-300 hover:opacity-80"
           />
@@ -55,15 +55,15 @@ const PostCard = forwardRef<HTMLDivElement, PostCardProps>(function PostCard(
       <div className="flex justify-between items-center border-t border-gray-200 mt-4 pt-2">
         <div className="flex items-center space-x-6 px-4 py-2 mb-2">
           <span className="flex items-center gap-x-1 body-medium">
-            <img width={16} height={16} alt="like" src="/icon.png" />
+            <img width={16} height={16} alt="like" src="/Icon.png" />
             {post.reactions.likes}
           </span>
           <span className="flex items-center gap-x-1 body-medium">
-            <img width={16} height={16} alt="dislike" src="/icon (2).png" />
+            <img width={16} height={16} alt="dislike" src="/Icon (2).png" />
             {post.reactions.dislikes}
           </span>
           <span className="flex items-center gap-x-1 body-medium">
-            <img width={16} height={16} alt="views" src="/icon (1).png" />
+            <img width={16} height={16} alt="views" src="/Icon (1).png" />
             {post.views}
           </span>
         </div>

@@ -33,7 +33,7 @@ export default async function UserProfile({ params }: UserProfileProps) {
             href="/"
             className="absolute left-4 flex items-center text-blue-500 hover:underline"
           >
-            <img width={6} height={12} alt="back" src="/icon (4).png" />
+            <img width={6} height={12} alt="back" src="/Icon (4).png" />
           </Link>
           <h3 className="text-center">Profile</h3>
         </div>
@@ -53,7 +53,7 @@ export default async function UserProfile({ params }: UserProfileProps) {
             href="/"
             className="absolute left-4 flex items-center text-blue-500 hover:underline"
           >
-            <img width={6} height={12} alt="back" src="/icon (4).png" />
+            <img width={6} height={12} alt="back" src="/Icon (4).png" />
           </Link>
           <h3 className="text-center">Profile</h3>
         </div>
@@ -73,7 +73,7 @@ export default async function UserProfile({ params }: UserProfileProps) {
           href="/"
           className="absolute left-4 flex items-center text-blue-500 hover:underline"
         >
-          <img width={6} height={12} alt="back" src="/icon (4).png" />
+          <img width={6} height={12} alt="back" src="/Icon (4).png" />
         </Link>
         <h3 className="text-center">Profile</h3>
       </div>
