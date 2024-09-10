@@ -1,5 +1,5 @@
 import { User } from "../types";
-import UserCard from "./UserCard"; // The component we just created
+import UserCard from "./UserCard";
 
 interface WhoToFollowProps {
   users: User[];
