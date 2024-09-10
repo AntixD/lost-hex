@@ -19,7 +19,7 @@ const UserProfileDetails = ({ user }: UserProfileDetailsProps) => {
 
         <div className="flex flex-col md:flex-row md:ml-4 items-center md:items-start -mt-24 md:-mt-8">
           <div className="border-4 border-neutral-50 rounded-full p-1 w-fit">
-            <Image
+            <img
               width={120}
               height={120}
               src="/avatar.png"
@@ -35,7 +35,7 @@ const UserProfileDetails = ({ user }: UserProfileDetailsProps) => {
             <div className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-4">
               <p className="body">@{user.username}</p>
               <p className="body flex items-center gap-2">
-                <Image
+                <img
                   width={12}
                   height={14}
                   alt="location"

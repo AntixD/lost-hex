@@ -12,7 +12,7 @@ export default function UserCard({ user }: UserCardProps) {
     <div className="border border-gray-200 rounded-lg shadow-sm p-4 flex items-center justify-between">
       <div className="flex items-center space-x-4">
         <Link href={`/profile/${user.id}`}>
-          <Image
+          <img
             width={40}
             height={40}
             src="/avatar.png"
