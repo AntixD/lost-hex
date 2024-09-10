@@ -1,5 +1,4 @@
 import { User } from "@/types";
-import Image from "next/image";
 import Button from "./Button";
 
 interface UserProfileDetailsProps {

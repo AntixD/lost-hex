@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Post } from "../types";
-import Image from "next/image";
 import { forwardRef } from "react";
 
 interface PostCardProps {
