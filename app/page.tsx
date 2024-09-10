@@ -6,27 +6,21 @@ import RecentPosts from "../components/RecentPosts";
 import { getSuggestedPosts, getWhoToFollow } from "../utils/api";
 
 export default async function FeedPage() {
-  // Fetch data directly in the server component
   const suggestedPosts: Post[] = await getSuggestedPosts();
   const whoToFollow: User[] = await getWhoToFollow();
 
   return (
-    <div className="container mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Feed</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <>
+      <h3 className="w-full flex items-center justify-center h-14 border-b border-slate-200 shadow-[0_1px_3px_rgba(26,26,26,0.08)]">
+        Feed
+      </h3>
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-1 gap-8">
         <div className="col-span-2">
-          {/* Suggested Posts Section */}
           <SuggestedPosts posts={suggestedPosts} />
-
-          {/* Recent Posts Section */}
+          <WhoToFollow users={whoToFollow} />
           <RecentPosts />
         </div>
-
-        <div>
-          {/* Who to Follow Section */}
-          <WhoToFollow users={whoToFollow} />
-        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -8,7 +8,7 @@ interface SuggestedPostsProps {
 export default function SuggestedPosts({ posts }: SuggestedPostsProps) {
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Suggested Posts</h2>
+      <h2 className="mt-8 mb-4">Suggested Posts</h2>
       {posts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}

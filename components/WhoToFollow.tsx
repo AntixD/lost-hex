@@ -1,5 +1,5 @@
 import { User } from "../types";
-import UserCard from "./UserCard";
+import UserCard from "./UserCard"; // The component we just created
 
 interface WhoToFollowProps {
   users: User[];
@@ -8,10 +8,12 @@ interface WhoToFollowProps {
 export default function WhoToFollow({ users }: WhoToFollowProps) {
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Who to Follow</h2>
-      {users.map((user) => (
-        <UserCard key={user.id} user={user} />
-      ))}
+      <h2>Who to follow</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {users.map((user) => (
+          <UserCard key={user.id} user={user} />
+        ))}
+      </div>
     </div>
   );
 }

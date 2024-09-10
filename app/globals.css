@@ -25,3 +25,41 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer base {
+  h1 {
+    @apply text-3xl font-extrabold text-primary;
+  }
+
+  h2 {
+    @apply text-2xl font-extrabold text-primary;
+  }
+
+  h3 {
+    @apply text-lg font-extrabold text-primary;
+  }
+
+  h4 {
+    @apply text-base font-extrabold text-primary;
+  }
+
+  .body {
+    @apply text-base font-medium text-secondary;
+  }
+
+  .body-medium {
+    @apply text-sm font-medium text-secondary;
+  }
+
+  .body-small {
+    @apply text-xs font-medium text-secondary;
+  }
+
+  .overline {
+    @apply text-base uppercase font-medium text-secondary;
+  }
+
+  .overline-small {
+    @apply text-xs uppercase font-medium text-secondary;
+  }
+}

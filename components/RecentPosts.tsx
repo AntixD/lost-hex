@@ -6,40 +6,43 @@ import { getRecentPosts } from "../utils/api";
 
 export default function RecentPosts() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [skip, setSkip] = useState(0); // For pagination
+  const [skip, setSkip] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true); // To check if there are more posts
+  const [hasMore, setHasMore] = useState(true);
 
   const loadMorePosts = async () => {
-    if (!hasMore) return; // If no more posts, stop the loading
+    if (loading || !hasMore) return;
 
     setLoading(true);
-    const newPosts = await getRecentPosts(skip); // Fetch the next set of posts
-    if (newPosts.length === 0) {
-      setHasMore(false); // Stop loading if no more posts
-    } else {
-      setPosts((prev) => [...prev, ...newPosts]);
-      setSkip(skip + 5); // Increment the skip for the next batch
+    try {
+      const newPosts = await getRecentPosts(skip, 5);
+      if (newPosts.length === 0) {
+        setHasMore(false);
+      } else {
+        setPosts((prev) => [...prev, ...newPosts]);
+        setSkip((prevSkip) => prevSkip + 5);
+      }
+    } catch (error) {
+      console.error("Error loading more posts:", error);
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    loadMorePosts(); // Initial load of posts
+    loadMorePosts();
 
     const handleScroll = () => {
-      // Detect if the user has reached the bottom of the page
       if (
-        window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight - 50
       ) {
-        loadMorePosts(); // Load more posts if user reaches bottom
+        loadMorePosts();
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [skip]); // Depend on skip to ensure new posts are loaded when it changes
+  }, []);
 
   return (
     <div>
@@ -47,8 +50,14 @@ export default function RecentPosts() {
       {posts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
-      {loading && <p>Loading more posts...</p>}
-      {!hasMore && <p>No more posts to show.</p>}
+      {loading && (
+        <div className="flex justify-center mt-4">
+          <div className="loader">Loading...</div>{" "}
+        </div>
+      )}
+      {!hasMore && !loading && (
+        <p className="text-center mt-4">No more posts to show.</p>
+      )}
     </div>
   );
 }
