@@ -1,6 +1,7 @@
 import { User } from "../types";
 import Link from "next/link";
-import Image from "next/image"; // For avatar
+import Image from "next/image";
+import Button from "./Button";
 
 interface UserCardProps {
   user: User;
@@ -12,25 +13,23 @@ export default function UserCard({ user }: UserCardProps) {
       <div className="flex items-center space-x-4">
         <Link href={`/profile/${user.id}`}>
           <Image
-            width={48}
-            height={48}
+            width={40}
+            height={40}
             src="/avatar.png"
             alt={`${user.firstName} ${user.lastName}'s avatar`}
-            className="w-12 h-12 rounded-full"
+            className="w-10 h-10 rounded-full transition-opacity duration-300 hover:opacity-80"
           />
         </Link>
         <div>
           <Link href={`/profile/${user.id}`}>
-            <h4>
+            <h4 className="relative inline-block after:content-[''] after:absolute after:w-full after:h-[1px] after:bg-black after:left-0 after:bottom-[2px] after:scale-x-0 after:origin-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-left">
               {user.firstName} {user.lastName}
             </h4>
           </Link>
           <p className="body-small">@{user.username}</p>
         </div>
       </div>
-      <button className="border border-tertiary text-tertiary px-4 py-1 rounded-full hover:border-hoverTertiary hover:text-hoverTertiary transition">
-        Follow
-      </button>
+      <Button title="Follow" variant="two" />
     </div>
   );
 }

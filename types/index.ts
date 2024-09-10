@@ -16,6 +16,7 @@ export interface User {
   firstName: string;
   lastName: string;
   username: string;
+  postsCount?: number;
   address: {
     city: string;
     state: string;

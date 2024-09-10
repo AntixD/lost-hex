@@ -1,61 +1,62 @@
-"use client"; // Mark this as a client component for infinite scroll
-import { useState, useEffect } from "react";
+"use client";
+
+import { useState, useEffect, useMemo } from "react";
 import { Post } from "../types";
 import PostCard from "./PostCard";
-import { getRecentPosts } from "../utils/api";
+import { getPostsByPage } from "../utils/api";
+import { useInView } from "react-intersection-observer";
 
 export default function RecentPosts() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [skip, setSkip] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
+  const pageCount = useMemo(() => posts.length / 5, [posts]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasLoadedAll, setHasLoadedAll] = useState(false);
+  const { ref, inView } = useInView();
 
-  const loadMorePosts = async () => {
-    if (loading || !hasMore) return;
+  const loadPosts = async () => {
+    if (hasLoadedAll) return;
 
-    setLoading(true);
-    try {
-      const newPosts = await getRecentPosts(skip, 5);
-      if (newPosts.length === 0) {
-        setHasMore(false);
-      } else {
-        setPosts((prev) => [...prev, ...newPosts]);
-        setSkip((prevSkip) => prevSkip + 5);
-      }
-    } catch (error) {
-      console.error("Error loading more posts:", error);
+    setIsLoading(true);
+
+    const newPosts = await getPostsByPage(pageCount);
+
+    if (newPosts) {
+      setPosts([...posts, ...newPosts]);
+    } else {
+      setHasLoadedAll(true);
     }
-    setLoading(false);
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    loadMorePosts();
-
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight - 50
-      ) {
-        loadMorePosts();
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    loadPosts();
   }, []);
 
+  useEffect(() => {
+    if (inView) {
+      loadPosts();
+    }
+  }, [inView]);
+
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4">Recent Posts</h2>
-      {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
-      ))}
-      {loading && (
-        <div className="flex justify-center mt-4">
-          <div className="loader">Loading...</div>{" "}
+    <div className="mt-8">
+      <h2>Recent Posts</h2>
+      {posts.map((post, index) => {
+        if (index === posts.length - 1) {
+          return <PostCard key={post.id} post={post} ref={ref} />;
+        }
+
+        return <PostCard key={post.id} post={post} />;
+      })}
+
+      {isLoading && (
+        <div className="flex justify-center items-center mt-6">
+          <div className="custom-spinner w-5 h-5 rounded-full"></div>
         </div>
       )}
-      {!hasMore && !loading && (
+
+      {hasLoadedAll && (
         <p className="text-center mt-4">No more posts to show.</p>
       )}
     </div>
